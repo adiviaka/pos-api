@@ -15,7 +15,8 @@ class TransactionController extends Controller
 
     public function show($id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::with('details')->findOrFail($id);
+
         return response()->json($transaction);
     }
 

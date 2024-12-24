@@ -71,7 +71,7 @@ class ProductController extends Controller
             'stock' => 'nullable|integer',
             'category' => 'nullable|string|max:255',
         ]);
-
+        Log::info($request->all());
         if ($validator->fails()) {
             return response()->json(['error' => $validator->errors()], 422);
         }
@@ -106,9 +106,13 @@ class ProductController extends Controller
             'name' => 'required|string|max:255',
         ]);
 
-        $products = Product::where('name', 'like', '%' . $request->name . '%')->paginate(10);
+        $products = Product::where('name', 'ILIKE', '%' . $request->name . '%')
+            ->orWhere('name', 'like', '%' . strtolower($request->name) . '%')
+            ->paginate(10);
+
         return response()->json($products);
     }
+
 
     public function filterByCategory(Request $request)
     {
