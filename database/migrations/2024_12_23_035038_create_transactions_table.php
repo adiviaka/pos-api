@@ -15,12 +15,10 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->foreignUuid('created_by');  // Use foreignUuid here
+            $table->foreignUuid('created_by');
             $table->timestamp('transaction_date');
             $table->integer('total_amount');
             $table->timestamps();
-
-            // Define foreign key constraint for created_by
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }

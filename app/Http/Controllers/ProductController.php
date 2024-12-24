@@ -9,14 +9,12 @@ use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
-    // Show all products with pagination
-    public function index(Request $request)
+    public function index()
     {
-        $products = Product::paginate(10); // You can change the number (10) as needed
+        $products = Product::paginate(10);
         return response()->json($products);
     }
 
-    // Show a single product by ID
     public function show($id)
     {
         $product = Product::find($id);
@@ -58,8 +56,6 @@ class ProductController extends Controller
         }
     }
 
-
-    // Update an existing product
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
@@ -88,7 +84,6 @@ class ProductController extends Controller
         }
     }
 
-    // Soft delete a product
     public function destroy($id)
     {
         $product = Product::find($id);
@@ -105,7 +100,6 @@ class ProductController extends Controller
         }
     }
 
-    // Search products by name
     public function search(Request $request)
     {
         $request->validate([
@@ -116,7 +110,6 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    // Filter products by category
     public function filterByCategory(Request $request)
     {
         $request->validate([

@@ -25,15 +25,15 @@ class User extends Model
         'password',
     ];
 
-    public $incrementing = false; // Disable auto-incrementing for UUID
+    public $incrementing = false;
 
-    protected $keyType = 'string'; // Use string type for UUID
+    protected $keyType = 'string';
 
     protected static function booted()
     {
         static::creating(function ($user) {
             if (!$user->id) {
-                $user->id = (string) Str::uuid(); // Generate a UUID for the user.
+                $user->id = (string) Str::uuid();
             }
         });
     }

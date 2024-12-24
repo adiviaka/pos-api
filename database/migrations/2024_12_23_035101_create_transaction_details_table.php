@@ -14,15 +14,13 @@ class CreateTransactionDetailsTable extends Migration
     public function up()
     {
         Schema::create('transaction_details', function (Blueprint $table) {
-            $table->uuid('id')->primary(); // UUID as primary key
-            $table->uuid('transaction_id'); // foreign key to transactions table
-            $table->uuid('product_id'); // foreign key to products table
+            $table->uuid('id')->primary();
+            $table->uuid('transaction_id');
+            $table->uuid('product_id');
             $table->integer('quantity');
             $table->integer('price');
             $table->integer('subtotal');
-            $table->timestamps(); // created_at, updated_at
-
-            // Foreign keys to transactions and products table
+            $table->timestamps();
             $table->foreign('transaction_id')->references('id')->on('transactions')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

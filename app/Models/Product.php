@@ -12,10 +12,8 @@ class Product extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'products';
 
-    // The primary key for the model
     protected $primaryKey = 'id';
 
-    // The attributes that are mass assignable
     protected $fillable = [
         'name',
         'description',
@@ -24,26 +22,23 @@ class Product extends Model
         'category'
     ];
 
-    // The attributes that should be hidden for arrays
     protected $hidden = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
-    // Enable UUID as the primary key
     public $incrementing = false;
     protected $keyType = 'string';
     protected static function booted()
     {
         static::creating(function ($product) {
             if (!$product->id) {
-                $product->id = (string) Str::uuid(); // Automatically generate a UUID
+                $product->id = (string) Str::uuid();
             }
         });
     }
 
-    // The attributes that should be cast to native types
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',

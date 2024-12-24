@@ -17,13 +17,11 @@ class TransactionDetail extends Model
         'subtotal',
     ];
 
-    // Define the relationship with the Transaction model
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);
     }
 
-    // Define the relationship with the Product model
     public function product()
     {
         return $this->belongsTo(Product::class);
